@@ -1,0 +1,1 @@
+This repository is a collection of all bioinformatics projects I have been working on.
