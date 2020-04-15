@@ -9,6 +9,8 @@ def kd_motifs(file_name):
 # TODO Looking over the solution, ATT and ATA should be part of the solution. The way my current code works it to
 #  make ATT the representative of ATA. It looks like I need to add not only the current kmer but its d-mismatch
 #  counterparts to kmer_appearences
+
+# TODO I need to figure out how to rewrite (and rename) the code in frequestKmersUptoDMismatch to address the above
 def find_motifs(k, d, sequences):
     """
     Given several sequences, scan through each storing each kmer and all of its d-mismatches. If the original kmer or
@@ -33,17 +35,7 @@ def find_motifs(k, d, sequences):
         for i in range(len(sequence) - k):
             current_kmer = sequence[i:i+k]
 
-            kmer_has_representative = False
-            for kmer in kmer_appearances:
-                if hammingDist(kmer, current_kmer) <= d:
-                    kmer_has_representative = True
-                    if sequence_index not in kmer_appearances[kmer]:
-                        kmer_appearances[kmer].append(sequence_index)
-                    break
-
-            if not kmer_has_representative:
-                kmer_appearances[current_kmer] = [sequence_index]
-        sequence_index = sequence_index + 1
+            current_kmer_d_mismatches = []
 
     kd_motif = []
     for kmer in kmer_appearances:
